@@ -4,7 +4,7 @@ import requests
 app = Flask(__name__)
 
 # Configuración del dispositivo de control de acceso
-DEVICE_IP = "10.0.0.196"  # Cambiar a la IP del equipo
+DEVICE_IP = "10.0.0.200"  # Cambiar a la IP del equipo
 DEVICE_PORT = "8080"  # Puerto del equipo
 
 @app.route('/send_data', methods=['POST'])
