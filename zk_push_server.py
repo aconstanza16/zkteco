@@ -36,8 +36,12 @@ def device_status():
 def debug():
     return jsonify({"message": "El servidor Flask en Railway está funcionando"}), 200
 
+
+import os
+
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))  # Toma el puerto asignado por Railway
+    port = int(os.environ.get("PORT", 5000))
+    print(f"Servidor corriendo en el puerto: {port}")
     app.run(host='0.0.0.0', port=port)
 
 
