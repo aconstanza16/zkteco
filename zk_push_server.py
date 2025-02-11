@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # Configuración del dispositivo de control de acceso
 DEVICE_IP = "10.0.0.201"  # Cambia a la IP del equipo
-DEVICE_PORT = "8080"  # Puerto del equipo
+DEVICE_PORT = "4370"  # Puerto del equipo
 
 # Configurar logs para depuración en Railway
 logging.basicConfig(level=logging.DEBUG)
