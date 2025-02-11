@@ -1,11 +1,16 @@
 from flask import Flask, request, jsonify
 import requests
+import os
+import logging
 
 app = Flask(__name__)
 
 # Configuración del dispositivo de control de acceso
-DEVICE_IP = "10.0.0.201"  # Cambiar a la IP del equipo
+DEVICE_IP = "10.0.0.201"  # Cambia a la IP del equipo
 DEVICE_PORT = "8080"  # Puerto del equipo
+
+# Configurar logs para depuración en Railway
+logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/send_data', methods=['POST'])
 def send_data():
@@ -26,12 +31,13 @@ def device_status():
         return jsonify(response.json()), response.status_code
     except requests.exceptions.RequestException as e:
         return jsonify({"error": str(e)}), 500
-import logging
 
-logging.basicConfig(level=logging.DEBUG)
+@app.route('/debug', methods=['GET'])
+def debug():
+    return jsonify({"message": "El servidor Flask en Railway está funcionando"}), 200
 
-@app.route('/test_log', methods=['GET'])
-def test_log():
-    app.logger.info("Probando logs en Railway")
-    return jsonify({"status": "log funcionando"}), 200
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))  # Toma el puerto asignado por Railway
+    app.run(host='0.0.0.0', port=port)
+
 
