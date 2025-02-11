@@ -26,4 +26,12 @@ def device_status():
         return jsonify(response.json()), response.status_code
     except requests.exceptions.RequestException as e:
         return jsonify({"error": str(e)}), 500
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+
+@app.route('/test_log', methods=['GET'])
+def test_log():
+    app.logger.info("Probando logs en Railway")
+    return jsonify({"status": "log funcionando"}), 200
 
