@@ -44,4 +44,10 @@ if __name__ == '__main__':
     print(f"Servidor corriendo en el puerto: {port}")
     app.run(host='0.0.0.0', port=port)
 
+import os
+
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))  # Asegurar el puerto dinámico
+    print(f"Ejecutando Gunicorn en el puerto: {port}")
+    os.system(f"gunicorn -w 4 -b 0.0.0.0:{port} zk_push_server:app")
 
