@@ -59,7 +59,7 @@ class ZKRequestHandler:
         """
         try:
             # 🔹 Ajusta la URL para que coincida con la API del equipo (si tiene una)
-            url = f"http://{10.0.0.201}:{8080}/iclock/cdata"
+            url = f"http://{zkteco-production.up.railway.app}:{8080}/iclock/cdata"
 
             # 🔹 Datos que enviamos al equipo
             payload = {
