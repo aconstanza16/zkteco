@@ -3,7 +3,7 @@ import json
 import requests  # Necesario para comunicarse con el dispositivo
 
 # Configuración del equipo ZKTeco
-ZKTECO_IP = "10.0.0.201"  # 🔹 Reemplaza con la IP del equipo en tu red
+ZKTECO_IP = "0.0.0.0"  # 🔹 Reemplaza con la IP del equipo en tu red
 ZKTECO_PORT = 8080        # 🔹 Puerto de comunicación del dispositivo
 
 class ZKRequestHandler:
@@ -59,7 +59,7 @@ class ZKRequestHandler:
         """
         try:
             # 🔹 Ajusta la URL para que coincida con la API del equipo (si tiene una)
-            url = f"http://{10.0.0.201}:{8080}/iclock/cdata"
+            url = f"http://{0.0.0.0}:{8080}/iclock/cdata"
 
             # 🔹 Datos que enviamos al equipo
             payload = {
