@@ -33,7 +33,38 @@ class ZKRequestHandler:
                 # 📡 Si no es una consulta de usuarios, devuelve los GET básicos como antes
                 resp.status = falcon.HTTP_200
                 resp.text = json.dumps({
-                    "status":
+                    "status": "success",
+                    "message": "Servidor en Railway activo y listo para recibir datos.",
+                    "received_params": params
+                })
+        except Exception as e:
+            print(f"❌ Error en GET: {e}")
+            resp.status = falcon.HTTP_500
+            resp.text = json.dumps({"error": str(e)})
+
+    def obtener_usuarios_zkteco(self):
+        """
+        📡 Envía el comando QUERY USERINFO al dispositivo ZKTeco para obtener la lista de usuarios.
+        """
+        try:
+            url = f"http://{ZKTECO_IP}:{ZKTECO_PORT}/iclock/cdata"
+            payload = "QUERY USERINFO"
+
+            response = requests.post(url, data=payload, timeout=10)
+
+            if response.status_code == 200:
+                print(f"✅ Usuarios obtenidos correctamente desde ZKTeco.")
+                return response.text  # Devuelve la respuesta del equipo
+            else:
+                print(f"❌ Error al obtener usuarios: {response.status_code} - {response.text}")
+                return None
+        except Exception as e:
+            print(f"❌ No se pudo comunicar con ZKTeco: {e}")
+            return None
+
+# 🛠️ Crear la aplicación Falcon
+app = falcon.App()
+app.add_route('/iclock/cdata', ZKRequestHandler())
 
 
 
