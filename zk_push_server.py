@@ -4,7 +4,7 @@ import requests  # Necesario para comunicarse con el dispositivo
 
 # Configuración del equipo ZKTeco
 ZKTECO_IP = "10.0.0.201"  # 🔹 Reemplaza con la IP del equipo en tu red
-ZKTECO_PORT = 4370        # 🔹 Puerto de comunicación del dispositivo
+ZKTECO_PORT = 8080        # 🔹 Puerto de comunicación del dispositivo
 
 class ZKRequestHandler:
     def on_get(self, req, resp):
