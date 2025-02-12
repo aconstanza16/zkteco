@@ -3,30 +3,24 @@ import json
 
 class ZKUserHandler:
     def on_get(self, req, resp):
-        """ Captura todas las solicitudes GET del equipo ZKTeco y las maneja correctamente """
+        """ Captura y muestra todas las solicitudes GET que llegan desde el ZKTeco """
         params = req.params
         print(f"📡 GET recibido de ZKTeco con parámetros: {params}")
 
-        # Verificar si el equipo envía un número de serie (SN)
-        if 'SN' in params:
-            resp.status = falcon.HTTP_200
-            resp.text = json.dumps({
-                "status": "success",
-                "message": "Datos recibidos correctamente",
-                "received_data": params
-            })
-        else:
-            resp.status = falcon.HTTP_400
-            resp.text = json.dumps({
-                "status": "error",
-                "message": "Solicitud no válida. Falta el número de serie (SN)."
-            })
+        # Guardar los datos en un archivo de log en Railway (para verlos después)
+        with open("/tmp/log_zkteco.txt", "a") as log_file:
+            log_file.write(f"📡 Datos recibidos: {params}\n")
+
+        resp.status = falcon.HTTP_200
+        resp.text = json.dumps({
+            "status": "success",
+            "message": "Datos recibidos correctamente",
+            "received_data": params
+        })
 
 # 🛠️ Crear la aplicación Falcon
 app = falcon.App()
 app.add_route('/iclock/cdata', ZKUserHandler())
-
-
 
 
 
