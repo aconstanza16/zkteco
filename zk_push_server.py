@@ -84,6 +84,7 @@ class ZKRequestHandler:
             print(f"❌ No se pudo comunicar con ZKTeco: {e}")
             return False
 
-app = falcon.App()
+app = falcon.API()  # En vez de falcon.App()
 app.add_route('/iclock/cdata', ZKRequestHandler())
+
 
