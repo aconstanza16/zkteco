@@ -1,0 +1,12 @@
+# Ignorar archivos de entorno y dependencias
+__pycache__/
+*.pyc
+*.pyo
+*.log
+
+# Ignorar archivos de configuración de entornos virtuales
+venv/
+.env
+
+# Ignorar logs y archivos temporales
+zk_logs.txt
