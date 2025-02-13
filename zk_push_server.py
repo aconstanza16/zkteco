@@ -17,8 +17,12 @@ class ZKUserHandler:
             with open(LOG_FILE, "a") as log_file:
                 log_file.write(f"{raw_data}\n")
 
-            # Detectar si el mensaje contiene datos de usuario y guardarlos aparte
-            if raw_data.startswith("USER"):
+            # Depuración: Guardar todos los mensajes en un solo archivo sin filtrar
+            with open("/tmp/debug_all_zkteco.txt", "a") as debug_file:
+                debug_file.write(f"{raw_data}\n")
+
+            # Si contiene "USER PIN=", guardarlo en un archivo separado
+            if "USER PIN=" in raw_data:
                 with open(USER_FILE, "a") as user_file:
                     user_file.write(f"{raw_data}\n")
                 print(f"✅ Datos de usuario guardados en {USER_FILE}")
