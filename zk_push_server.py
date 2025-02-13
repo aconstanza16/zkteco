@@ -1,7 +1,7 @@
 import requests
 
 # 📡 Configuración del servidor y dispositivo
-server_url = "https://zkteco-production.up.railway.app/cdata"  # Reemplaza con la URL de Railway
+server_url = "http://10.0.0.201:8080/iclock/cdata"  # Reemplaza con la IP y puerto correctos
 device_sn = "5430244500365"  # Número de serie del ZKTeco
 
 # 🧑 Información del usuario a registrar
@@ -25,9 +25,10 @@ user_command = f"DATA UPDATE USERINFO PIN={user_data['PIN']}\tName={user_data['N
 params = {"SN": device_sn, "table": "OPERLOG", "Stamp": "99999999"}
 response = requests.post(server_url, params=params, data=user_command)
 
-# 📡 Mostrar respuesta del servidor
+# 📡 Responder al ZKTeco con "OK" para evitar que cierre la conexión
 if response.status_code == 200:
     print(f"✅ Usuario enviado correctamente: {user_command}")
+    requests.post(server_url, data="OK")  # Responder con "OK" al ZKTeco
 else:
     print(f"❌ Error al enviar usuario: {response.status_code} - {response.text}")
 
