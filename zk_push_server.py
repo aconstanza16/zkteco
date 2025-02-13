@@ -6,7 +6,7 @@ DEVICE_SN = "5430244500365"  # Número de serie del dispositivo
 
 def send_user(pin, name, passwd, card):
     url = f"http://{ZK_IP}:{ZK_PORT}/iclock/devicecmd?SN={DEVICE_SN}"
-    payload = f"USERINFO PIN={pin}\tName={name}\tPasswd={passwd}\tCard={card}\tGrp=1\tTZ="
+    payload = f"SET USERINFO PIN={pin}\tName={name}\tPasswd={passwd}\tCard={card}\tGrp=1\tTZ="
     
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
     print(f"📡 Enviando usuario al ZKTeco: {payload}")
@@ -20,6 +20,7 @@ def send_user(pin, name, passwd, card):
 
 # Prueba enviando un usuario
 send_user("1001", "Juan Perez", "1234", "987654")
+
 
 
 
