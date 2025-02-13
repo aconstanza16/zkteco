@@ -1,7 +1,7 @@
 import requests
 
 # 📡 Configuración del servidor y dispositivo
-server_url = "https://TU_SERVIDOR/iclock/cdata"  # Reemplaza con la URL de Railway
+server_url = "https://zkteco-production.up.railway.app/cdata"  # Reemplaza con la URL de Railway
 device_sn = "5430244500365"  # Número de serie del ZKTeco
 
 # 🧑 Información del usuario a registrar
