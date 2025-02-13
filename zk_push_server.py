@@ -3,20 +3,17 @@ import json
 
 class ZKUserHandler:
     def on_get(self, req, resp):
-        """ Maneja solicitudes GET del ZKTeco """
+        """ Maneja solicitudes GET del ZKTeco con respuesta ADMS """
         params = req.params
         print(f"📡 GET recibido de ZKTeco con parámetros: {params}")
 
-        # Guardar en log para verificar qué está enviando el ZKTeco
+        # Guardar en log
         with open("/tmp/log_zkteco.txt", "a") as log_file:
             log_file.write(f"📡 GET recibido: {params}\n")
 
+        # Respuesta en formato ADMS
         resp.status = falcon.HTTP_200
-        resp.text = json.dumps({
-            "status": "success",
-            "message": "GET recibido",
-            "received_data": params
-        })
+        resp.text = "OK"
 
     def on_post(self, req, resp):
         """ Maneja solicitudes POST del ZKTeco """
@@ -28,13 +25,9 @@ class ZKUserHandler:
             with open("/tmp/log_zkteco.txt", "a") as log_file:
                 log_file.write(f"📡 POST recibido: {raw_json}\n")
 
-            # Responder en formato ADMS si el ZKTeco está esperando algo específico
+            # Respuesta en formato ADMS
             resp.status = falcon.HTTP_200
-            resp.text = json.dumps({
-                "status": "success",
-                "message": "POST recibido correctamente",
-                "received_data": raw_json
-            })
+            resp.text = "OK"
 
         except Exception as e:
             print(f"❌ Error procesando POST: {e}")
