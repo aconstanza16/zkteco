@@ -1,7 +1,7 @@
 import requests
 
 # 📡 Configuración del servidor y dispositivo
-server_url = "http://10.0.0.201:8080/iclock/cdata"  # Reemplaza con la IP y puerto correctos
+server_url = "http://zkteco-production.up.railway.app/iclock/cdata"  # Reemplaza con la IP y puerto correctos
 device_sn = "5430244500365"  # Número de serie del ZKTeco
 
 # 🧑 Información del usuario a registrar
