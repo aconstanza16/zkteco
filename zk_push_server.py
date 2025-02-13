@@ -1,19 +1,22 @@
 import falcon
-import requests
 import json
+import requests
 
-ZK_IP = "10.0.0.201"  # IP del dispositivo ZKTeco
+ZK_IP = "10.0.0.201"  # Cambia esto por la IP del dispositivo ZKTeco
 ZK_PORT = "8080"  # Puerto del dispositivo
 DEVICE_SN = "5430244500365"  # Número de serie del dispositivo
 
 class GetUsers:
     def on_get(self, req, resp):
-        """Solicita la lista de usuarios almacenados en el ZKTeco"""
+        """Solicita la lista de usuarios al ZKTeco"""
         try:
-            url = f"http://{ZK_IP}:{ZK_PORT}/iclock/getrequest?SN={DEVICE_SN}&action=USERINFO"
-            print(f"📡 Enviando solicitud al dispositivo: {url}")
+            url = f"http://{ZK_IP}:{ZK_PORT}/iclock/devicecmd?SN={DEVICE_SN}"
+            payload = "QUERY USERINFO"
 
-            response = requests.get(url)
+            headers = {"Content-Type": "application/x-www-form-urlencoded"}
+            print(f"📡 Enviando solicitud al dispositivo: {url} con payload: {payload}")
+
+            response = requests.post(url, data={"CMD": payload}, headers=headers)
 
             if response.status_code == 200:
                 print(f"📡 Respuesta del ZKTeco: {response.text}")
